@@ -1,4 +1,4 @@
-# ESP-Fan-Controller
+# ESP Fan Controller
 
 ESP8266 based fan controller with a webui. 
 
@@ -16,7 +16,7 @@ The webui also allows you to configure all of the device settings.
 
 ## Instructions
 
-After flashing, the device will create a wifi AP called `esp-fan-controller`. Connect to to the ap, go to http://192.168.4.1, and configure your wifi details.
+After flashing, the device will create a wifi AP called `esp-fan-controller`. Connect to the ap, go to http://192.168.4.1, and configure your wifi details.
 
 Once the device is connected to your network, connect to it using a web browser on port 80 and configure the temperature sensor addresses and other settings. 
 
