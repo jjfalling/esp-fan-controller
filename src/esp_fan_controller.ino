@@ -123,7 +123,12 @@ void setup()
 
   Serial.println("Device name: " + String(deviceName));
 
+  // force wifi to station mode, otherwise the the esp will always
+  //  start an open ap. which is a security issue.
+  WiFi.mode(WIFI_STA);
+
   WiFiManager wifiManager;
+  wifiManager.setConnectTimeout(60);
   wifiManager.autoConnect(deviceName);
 
   ArduinoOTA.setHostname(deviceName);
