@@ -16,6 +16,8 @@ The webui also allows you to configure all of the device settings.
 
 ## Instructions
 
+If using platform.io, copy the example config to platform.ini and adjust to work with your board. Otherwise see platform-example.ini for the required libraries. When flashing this project for the first time, it is advisable to erase the device flash before flashing the firmware.
+
 After flashing, the device will create a wifi AP called `esp-fan-controller` with the password `fancontroller`. Connect to the ap, go to http://192.168.4.1, and configure your wifi details.
 
 Once the device is connected to your network, connect to it using a web browser on port 80 and configure the temperature sensor addresses and other settings. 
