@@ -22,7 +22,7 @@ Once the device is connected to your network, connect to it using a web browser 
 
 Some debug information such as the device ip is printed to the serial port. You can also find it using mDNS.
 
-As long as you do not erase the flash while updating, all setting will persist across updates. The device also supports OTA updates (you must be on the same subnet as the device).
+As long as you do not erase the flash while updating, all setting will persist across updates. The device also supports OTA updates via the ArduinoOTA library (you must be on the same subnet as the device or flashing may fail).
 
 
 ## WebUI
