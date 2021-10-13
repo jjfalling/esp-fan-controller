@@ -129,6 +129,7 @@ void setup()
   //  start an open ap. which is a security issue.
   WiFi.mode(WIFI_STA);
 
+  // configure the wifi manager (used to configure wifi details)
   WiFiManager wManager;
   wManager.setAPCallback(wManagerConnectFailCallback);
   wManager.setConnectTimeout(60);
@@ -727,6 +728,7 @@ void webSendError(String errorHTML, String redirectTo)
 }
 
 /********************************************************************/
+// callback function when wifi connection fails
 void wManagerConnectFailCallback(WiFiManager *wManager)
 {
   Serial.println(WiFi.softAPIP());
