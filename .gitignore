@@ -35,3 +35,5 @@
 .pio
 .vscode/
 
+# platformio config to prevent unintended changes
+platformio.ini
