@@ -50,6 +50,8 @@
 #define PROJECT_NAME "ESP Fan Controller"
 #define FW_VERSION "1.1.1"
 
+#define AP_PASSWORD "fancontroller"
+
 // default values for webui settings
 char deviceName[64] = "esp-fan-controller";
 // diff between sensors, <= this it turns off
@@ -127,9 +129,10 @@ void setup()
   //  start an open ap. which is a security issue.
   WiFi.mode(WIFI_STA);
 
-  WiFiManager wifiManager;
-  wifiManager.setConnectTimeout(60);
-  wifiManager.autoConnect(deviceName);
+  WiFiManager wManager;
+  wManager.setAPCallback(wManagerConnectFailCallback);
+  wManager.setConnectTimeout(60);
+  wManager.autoConnect(deviceName, AP_PASSWORD);
 
   ArduinoOTA.setHostname(deviceName);
 
@@ -146,8 +149,7 @@ void setup()
                        }
 
                        // NOTE: if updating FS this would be the place to unmount FS using FS.end()
-                       Serial.println("Start updating " + type);
-                     });
+                       Serial.println("Start updating " + type); });
   ArduinoOTA.onEnd([]()
                    { Serial.println("\nEnd"); });
   ArduinoOTA.onProgress([](unsigned int progress, unsigned int total)
@@ -174,8 +176,7 @@ void setup()
                        else if (error == OTA_END_ERROR)
                        {
                          Serial.println("End Failed");
-                       }
-                     });
+                       } });
   ArduinoOTA.begin();
 
   // web endpoint config
@@ -411,7 +412,7 @@ void sensorStrToDeviceAddress(DeviceAddress convertedDevAddr, String devAddrStr)
 
   for (uint8_t i = 0; i < 8; i++)
   {
-    convertedDevAddr[i] = (__typeof__(convertedDevAddr[0]))addrv[i]; //fill in device address bytes using a cast
+    convertedDevAddr[i] = (__typeof__(convertedDevAddr[0]))addrv[i]; // fill in device address bytes using a cast
   }
 }
 
@@ -723,6 +724,18 @@ void webSendError(String errorHTML, String redirectTo)
   httpMessage += "</body></html>";
 
   webServer.send(400, "text/html", httpMessage);
+}
+
+/********************************************************************/
+void wManagerConnectFailCallback(WiFiManager *wManager)
+{
+  Serial.println(WiFi.softAPIP());
+  Serial.print("\n***Entered wifi config mode. Connect using the following details:\n***SSID: ");
+  Serial.println(wManager->getConfigPortalSSID());
+  Serial.println("***Password: " + String(AP_PASSWORD));
+  Serial.print("***Config URL: http://");
+  Serial.print(WiFi.softAPIP());
+  Serial.println("\n");
 }
 
 /********************************************************************/

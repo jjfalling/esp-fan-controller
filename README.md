@@ -16,9 +16,13 @@ The webui also allows you to configure all of the device settings.
 
 ## Instructions
 
-After flashing, the device will create a wifi AP called `esp-fan-controller`. Connect to the ap, go to http://192.168.4.1, and configure your wifi details.
+After flashing, the device will create a wifi AP called `esp-fan-controller` with the password `fancontroller`. Connect to the ap, go to http://192.168.4.1, and configure your wifi details.
 
 Once the device is connected to your network, connect to it using a web browser on port 80 and configure the temperature sensor addresses and other settings. 
+
+Some debug information such as the device ip is printed to the serial port. You can also find it using mDNS.
+
+As long as you do not erase the flash while updating, all setting will persist across updates. The device also supports OTA updates (you must be on the same subnet as the device).
 
 
 ## WebUI
